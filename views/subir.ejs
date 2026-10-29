@@ -1,0 +1,38 @@
+<%- include('partials/head') %>
+<section class="page narrow">
+  <h1>Subir imagen</h1>
+  <% if (ok) { %><p class="aviso ok">Imagen subida correctamente. <a href="/galeria">Ver galería</a></p><% } %>
+  <% if (error) { %><p class="aviso error"><%= error %></p><% } %>
+
+  <% if (!categorias.length) { %>
+    <p class="aviso error">Primero necesitas crear al menos una categoría. <a href="/categorias">Ir a categorías</a></p>
+  <% } else { %>
+  <form class="card form" method="post" action="/subir" enctype="multipart/form-data">
+    <label class="field"><span>Fichero de imagen</span>
+      <input type="file" name="imagen" id="inputImagen" accept="image/*" required>
+    </label>
+    <img id="previa" class="previa" alt="" hidden>
+
+    <label class="field"><span>Nombre</span>
+      <input type="text" name="titulo" maxlength="120" required>
+    </label>
+
+    <label class="field"><span>Fecha</span>
+      <input type="date" name="fecha" value="<%= hoy %>" required>
+    </label>
+
+    <label class="field"><span>Categoría</span>
+      <select name="categoria" required>
+        <% categorias.forEach(function (c) { %><option value="<%= c.id %>"><%= c.categoria %></option><% }) %>
+      </select>
+    </label>
+
+    <label class="field"><span>Etiquetas <small>(separadas por comas)</small></span>
+      <input type="text" name="etiquetas" placeholder="playa, verano, atardecer">
+    </label>
+
+    <button class="btn" type="submit">Subir</button>
+  </form>
+  <% } %>
+</section>
+<%- include('partials/foot', { scripts: ['/js/subir.js'] }) %>

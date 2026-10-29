@@ -1,0 +1,25 @@
+<%- include('partials/head') %>
+<% if (imagen) { %>
+<section class="hero" style="--bg: url('<%= imagen.ruta + imagen.fichero %>')">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="eyebrow">Mi colección de fotografías</p>
+    <h1>Bienvenido a la galería</h1>
+    <p class="lead">Una selección al azar: <a href="/imagen/<%= imagen.id %>"><%= imagen.titulo %></a></p>
+    <div class="acciones">
+      <a class="btn" href="/galeria">Ver galería</a>
+      <a class="btn ghost" href="/subir">Subir imagen</a>
+    </div>
+  </div>
+</section>
+<% } else { %>
+<section class="page vacio">
+  <h1>Bienvenido a la galería</h1>
+  <p>Todavía no hay imágenes. Crea una categoría y sube tu primera fotografía.</p>
+  <div class="acciones">
+    <a class="btn" href="/categorias">Crear categoría</a>
+    <a class="btn ghost" href="/subir">Subir imagen</a>
+  </div>
+</section>
+<% } %>
+<%- include('partials/foot') %>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title><%= titulo %> · Galería</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body class="<%= typeof bodyClass !== 'undefined' ? bodyClass : '' %>">
+<% if (typeof sinNav === 'undefined' || !sinNav) { %>
+<header class="topbar">
+  <a class="logo" href="/"><span class="logo-mark">◐</span> Galería</a>
+  <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav">☰</button>
+  <nav id="nav" class="nav">
+    <a href="/" class="<%= activo === 'inicio' ? 'activo' : '' %>">Inicio</a>
+    <a href="/galeria" class="<%= activo === 'galeria' ? 'activo' : '' %>">Galería</a>
+    <a href="/subir" class="<%= activo === 'subir' ? 'activo' : '' %>">Subir imagen</a>
+    <a href="/categorias" class="<%= activo === 'categorias' ? 'activo' : '' %>">Categorías</a>
+    <a href="/contacto" class="<%= activo === 'contacto' ? 'activo' : '' %>">Contacto</a>
+  </nav>
+</header>
+<% } %>
+<main>

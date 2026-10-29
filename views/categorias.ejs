@@ -1,0 +1,33 @@
+<%- include('partials/head') %>
+<section class="page">
+  <h1>Categorías</h1>
+  <% if (mensaje) { %><p class="aviso ok"><%= mensaje %></p><% } %>
+  <% if (error) { %><p class="aviso error"><%= error %></p><% } %>
+
+  <form class="card fila" method="post" action="/categorias">
+    <label class="field grow"><span>Nueva categoría</span>
+      <input type="text" name="categoria" maxlength="60" placeholder="Ej.: Paisajes" required>
+    </label>
+    <button class="btn" type="submit">Añadir</button>
+  </form>
+
+  <% if (categorias.length) { %>
+  <ul class="lista">
+    <% categorias.forEach(function (c) { %>
+    <li class="card fila">
+      <div class="grow">
+        <strong><%= c.categoria %></strong>
+        <small><%= c.total %> imagen<%= c.total === 1 ? '' : 'es' %></small>
+      </div>
+      <form method="post" action="/categorias/<%= c.id %>/eliminar"
+            onsubmit="return confirm('¿Eliminar la categoría «<%= c.categoria.replace(/'/g, "\\'") %>»?');">
+        <button class="btn danger" type="submit">Eliminar</button>
+      </form>
+    </li>
+    <% }) %>
+  </ul>
+  <% } else { %>
+  <p class="muted">Aún no hay categorías.</p>
+  <% } %>
+</section>
+<%- include('partials/foot') %>

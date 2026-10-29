@@ -1,0 +1,14 @@
+{
+  "name": "galeria-fotografias",
+  "version": "2.0.0",
+  "description": "Galería de fotografías en NodeJS (Express + MySQL + EJS)",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.0",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.11.0"
+  }
+}

@@ -1,0 +1,43 @@
+<%- include('partials/head') %>
+<section class="page wide">
+  <h1>Galería</h1>
+
+  <form id="filtros" class="card filtros" method="get" action="/galeria">
+    <label class="field"><span>Categoría</span>
+      <select name="categoria" id="selCategoria">
+        <option value="">Todas</option>
+        <% categorias.forEach(function (c) { %>
+        <option value="<%= c.id %>" <%= c.id === filtro.categoria ? 'selected' : '' %>><%= c.categoria %></option>
+        <% }) %>
+      </select>
+    </label>
+
+    <div class="field"><span>Etiquetas</span>
+      <div class="chips">
+        <% etiquetas.forEach(function (e) { %>
+        <label class="chip"><input type="checkbox" name="etiqueta" value="<%= e %>" <%= filtro.etiquetas.includes(e) ? 'checked' : '' %>><span><%= e %></span></label>
+        <% }) %>
+        <% if (!etiquetas.length) { %><em class="muted">Sin etiquetas</em><% } %>
+      </div>
+    </div>
+
+    <noscript><button class="btn" type="submit">Filtrar</button></noscript>
+    <% if (filtro.categoria || filtro.etiquetas.length) { %><a class="btn ghost" href="/galeria">Limpiar filtros</a><% } %>
+  </form>
+
+  <p class="muted"><%= imagenes.length %> imagen<%= imagenes.length === 1 ? '' : 'es' %></p>
+
+  <% if (imagenes.length) { %>
+  <div class="mosaico">
+    <% imagenes.forEach(function (im) { %>
+    <a class="tile" href="/imagen/<%= im.id %><%= qs %>">
+      <img loading="lazy" src="<%= im.ruta + im.fichero %>" alt="<%= im.titulo %>">
+      <span class="tile-cap"><%= im.titulo %></span>
+    </a>
+    <% }) %>
+  </div>
+  <% } else { %>
+  <p class="vacio muted">No hay imágenes con estos filtros.</p>
+  <% } %>
+</section>
+<%- include('partials/foot') %>

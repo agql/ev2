@@ -1,0 +1,33 @@
+<%- include('partials/head', { sinNav: true, bodyClass: 'visor-page', activo: '' }) %>
+<div class="visor" id="visor" data-prev="<%= prev ? '/imagen/' + prev + qs : '' %>" data-next="<%= next ? '/imagen/' + next + qs : '' %>">
+  <a class="cerrar" href="/galeria<%= qs %>" aria-label="Volver a la galería">✕</a>
+
+  <% if (prev) { %><a class="flecha izq" href="/imagen/<%= prev %><%= qs %>" aria-label="Imagen anterior">‹</a><% } %>
+  <% if (next) { %><a class="flecha der" href="/imagen/<%= next %><%= qs %>" aria-label="Imagen siguiente">›</a><% } %>
+
+  <figure class="visor-fig">
+    <img id="foto" src="<%= imagen.ruta + imagen.fichero %>" alt="<%= imagen.titulo %>">
+    <figcaption>
+      <div>
+        <strong><%= imagen.titulo %></strong>
+        <span><%= fechaES(imagen.fecha) %></span>
+      </div>
+      <div class="cap-der">
+        <small><%= pos %> / <%= total %></small>
+        <button class="btn small" id="btnZoom" type="button">🔍 Zoom</button>
+      </div>
+    </figcaption>
+  </figure>
+</div>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Zoom de la imagen">
+  <div class="modal-bar">
+    <button type="button" id="zOut" aria-label="Alejar">−</button>
+    <button type="button" id="zIn" aria-label="Acercar">+</button>
+    <button type="button" id="zReset">Ajustar</button>
+    <button type="button" id="zClose" aria-label="Cerrar">✕</button>
+  </div>
+  <div class="stage" id="stage"><img id="zImg" src="<%= imagen.ruta + imagen.fichero %>" alt="<%= imagen.titulo %>" draggable="false"></div>
+  <p class="modal-hint">Rueda del ratón o pellizco para ampliar · arrastra para moverte · doble clic para alternar</p>
+</div>
+<%- include('partials/foot', { scripts: ['/js/visor.js'] }) %>
